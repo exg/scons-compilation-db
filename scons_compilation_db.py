@@ -16,7 +16,10 @@ import json
 import SCons
 
 from SCons.Tool.cc import CSuffixes
-from SCons.Tool.cxx import CXXSuffixes
+
+CXXSuffixes = [".cpp", ".cc", ".cxx", ".c++", ".C++", ".mm"]
+if SCons.Util.case_sensitive_suffixes(".c", ".C"):
+    CXXSuffixes.append(".C")
 
 
 def add_compilation_db_emitter(builder, suffix, command):

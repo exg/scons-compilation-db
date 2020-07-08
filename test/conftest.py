@@ -18,8 +18,10 @@ def test_dir(tmp_path):
 
 @pytest.fixture
 def scons_runner(test_dir):
-    def runner(sconstruct):
+    def runner(sconstruct, args=None):
         cmd = ["scons", "-C", str(test_dir), "-f", str(test_dir / sconstruct)]
+        if args:
+            cmd.extend(args)
         return subprocess.check_call(cmd)
 
     return runner

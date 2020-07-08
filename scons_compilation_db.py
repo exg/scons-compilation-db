@@ -46,6 +46,10 @@ def add_compilation_db_emitter(builder, suffix, command):
     builder.add_emitter(suffix, emitter)
 
 
+def get_compilation_db_node(node, env, path):
+    return [SCons.Node.Python.Value(env["_COMPILATION_DB"])]
+
+
 def generate(env, **kwargs):
     static_obj, shared_obj = SCons.Tool.createObjBuilders(env)
 
@@ -75,13 +79,14 @@ def generate(env, **kwargs):
             )
 
     env["BUILDERS"]["_CompilationDB"] = SCons.Builder.Builder(
-        action=SCons.Action.Action(write_compilation_db)
+        action=SCons.Action.Action(write_compilation_db),
+        target_scanner=SCons.Scanner.Scanner(
+            function=get_compilation_db_node, node_class=None
+        ),
     )
 
     def compilation_db(env, target):
-        builder = env._CompilationDB(target, None)
-        env.AlwaysBuild(builder)
-        return builder
+        return env._CompilationDB(target, None)
 
     env.AddMethod(compilation_db, "CompilationDB")
 

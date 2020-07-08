@@ -1,0 +1,5 @@
+import os
+
+a = Environment(tools=["default", "scons_compilation_db"], toolpath=".")
+a.Program("a.c")
+a.CompilationDB("compile_commands.json")

@@ -30,7 +30,7 @@ def add_compilation_db_emitter(builder, suffix, command):
         entry = {
             "directory": env.Dir("#").abspath,
             "command": command,
-            "file": source[0].abspath,
+            "file": source[0].srcnode().abspath,
         }
 
         env["_COMPILATION_DB"].append(entry)

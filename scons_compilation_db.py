@@ -30,10 +30,15 @@ def add_compilation_db_emitter(builder, suffix, command):
             target=target, source=source, env=env,
         )
 
+        if source[0].srcnode().exists():
+            source_node = source[0].srcnode()
+        else:
+            source_node = source[0]
+
         entry = {
-            "directory": env.Dir("#").abspath,
+            "directory": target[0].dir.abspath,
             "command": command,
-            "file": source[0].srcnode().abspath,
+            "file": source_node.abspath,
         }
 
         env["_COMPILATION_DB"].append(entry)

@@ -1,0 +1,18 @@
+import os
+
+VariantDir("build", ".", duplicate=False)
+a = Environment(
+    CCFLAGS=ARGUMENTS.get("CCFLAGS", ""),
+    tools=["default", "scons_compilation_db"],
+    toolpath=".",
+)
+a.Program("build/a.c")
+a.Command(
+    "build/x.c",
+    "a.c",
+    [
+        Copy("$TARGET", "$SOURCE"),
+    ],
+)
+a.Program("build/x.c")
+a.CompilationDB("compile_commands.json")

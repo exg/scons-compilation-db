@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import json
-import SCons
 
+import SCons
 from SCons.Tool.cc import CSuffixes
 
 CXXSuffixes = [".cpp", ".cc", ".cxx", ".c++", ".C++", ".mm"]
@@ -27,7 +27,9 @@ def add_compilation_db_emitter(builder, suffix, command):
 
     def emit_compilation_db_entry(target, source, env):
         command = user_action.strfunction(
-            target=target, source=source, env=env,
+            target=target,
+            source=source,
+            env=env,
         )
 
         if source[0].srcnode().exists():
@@ -80,7 +82,10 @@ def generate(env, **kwargs):
     def write_compilation_db(target, source, env):
         with open(target[0].path, "w") as f:
             json.dump(
-                env["_COMPILATION_DB"], f, indent=2, sort_keys=True,
+                env["_COMPILATION_DB"],
+                f,
+                indent=2,
+                sort_keys=True,
             )
 
     env["BUILDERS"]["_CompilationDB"] = SCons.Builder.Builder(

@@ -1,8 +1,8 @@
+import subprocess
 from pathlib import Path
 from shutil import copyfile, copytree
 
 import pytest
-import subprocess
 
 TOOL_NAME = "scons_compilation_db.py"
 

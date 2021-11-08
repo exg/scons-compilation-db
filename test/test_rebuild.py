@@ -5,7 +5,7 @@ import os
 def test_rebuild_no_change(scons_runner, test_dir):
     scons_runner("sconstruct_basic")
     db_path = str(test_dir / "compile_commands.json")
-    with open(db_path) as f:
+    with open(db_path, "rb") as f:
         compilation_db = json.load(f)
         info = os.stat(f.fileno())
     assert compilation_db == [
@@ -22,7 +22,7 @@ def test_rebuild_no_change(scons_runner, test_dir):
 def test_rebuild(scons_runner, test_dir):
     scons_runner("sconstruct_basic")
     db_path = str(test_dir / "compile_commands.json")
-    with open(db_path) as f:
+    with open(db_path, "rb") as f:
         compilation_db = json.load(f)
     assert compilation_db == [
         {
@@ -32,7 +32,7 @@ def test_rebuild(scons_runner, test_dir):
         },
     ]
     scons_runner("sconstruct_basic", ["CCFLAGS=-O2"])
-    with open(db_path) as f:
+    with open(db_path, "rb") as f:
         compilation_db = json.load(f)
     assert compilation_db == [
         {

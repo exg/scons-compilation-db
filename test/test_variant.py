@@ -3,7 +3,7 @@ import json
 
 def test_variant(scons_runner, test_dir):
     scons_runner("sconstruct_variant")
-    with open(str(test_dir / "compile_commands.json")) as f:
+    with open(str(test_dir / "compile_commands.json"), "rb") as f:
         compilation_db = json.load(f)
     assert compilation_db == [
         {

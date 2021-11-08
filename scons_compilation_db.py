@@ -80,7 +80,7 @@ def generate(env, **kwargs):
     env.AddMethod(set_compilation_db, "SetCompilationDB")
 
     def write_compilation_db(target, source, env):
-        with open(target[0].path, "w") as f:
+        with open(target[0].path, "w", encoding="utf-8") as f:
             json.dump(
                 env["_COMPILATION_DB"],
                 f,

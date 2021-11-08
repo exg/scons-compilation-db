@@ -1,0 +1,14 @@
+[tool.black]
+line-length = 88
+[tool.isort]
+line_length = 88
+profile = "black"
+[tool.pylint.master]
+disable = [
+  "invalid-name",
+  "missing-function-docstring",
+  "missing-module-docstring",
+  "similarities",
+  "unused-argument"
+]
+max-line-length = 88

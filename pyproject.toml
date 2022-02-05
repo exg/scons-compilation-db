@@ -5,10 +5,9 @@ line_length = 88
 profile = "black"
 [tool.pylint.master]
 disable = [
+  "duplicate-code",
   "invalid-name",
-  "missing-function-docstring",
-  "missing-module-docstring",
-  "similarities",
+  "missing-docstring",
   "unused-argument"
 ]
 max-line-length = 88

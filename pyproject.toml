@@ -1,13 +1,12 @@
-[tool.black]
+[tool.ruff]
 line-length = 88
-[tool.isort]
-line_length = 88
-profile = "black"
-[tool.pylint.master]
-disable = [
-  "duplicate-code",
-  "invalid-name",
-  "missing-docstring",
-  "unused-argument"
+target-version = "py38"
+lint.select = [
+  "F",
+  "E",
+  "I",
+  "UP",
+  "PLE",
+  "PLW",
+  "RUF",
 ]
-max-line-length = 88
